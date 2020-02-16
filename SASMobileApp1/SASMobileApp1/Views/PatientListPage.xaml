@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="http://prismlibrary.com" prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:converter="clr-namespace:SASMobileApp1.Converters"
+             x:Class="SASMobileApp1.Views.PatientListPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:UtcToZonedDateTimeConverter x:Key="utcToZonedDateTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+
+            <ActivityIndicator x:Name="actInd" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <BoxView Color="aliceblue" Grid.Column="0" Grid.ColumnSpan="4" ></BoxView>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="End">Ward:</Label>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding WardName}"></Label>
+                <Button Grid.Row="0" Grid.Column="2" Text="Change" BackgroundColor="beige" CornerRadius="20" Command="{Binding WardChangeCommand}" />
+                <Button Grid.Row="0" Grid.Column="3" Text="Refresh" BackgroundColor="beige" CornerRadius="20" Command="{Binding UpdateListCommand}" />
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="PatientView" HasUnevenRows="True" ItemsSource="{Binding Pts}" SelectedItem="{Binding SelectedItem}">
+                    <ListView.Behaviors>
+                        <b:EventToCommandBehavior Command="{Binding ItemTappedCommand}" EventName="ItemTapped" EventArgsParameterPath="Item" />
+                    </ListView.Behaviors>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition  Width="*" />
+                                            <ColumnDefinition  Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding FullName}" />
+
+                                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+                                            <Label Text="Section:" />
+                                            <Label Text="{Binding Section}" />
+                                        </StackLayout>
+
+                                         <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End" Text="Seen:" />
+                                         <Label Grid.Row="1" Grid.Column="2" Text="{Binding LastSeen, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter} }" BackgroundColor="{Binding ObsTimeColour}" />
+
+
+                                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <Label Text="NHSno:" />
+                                            <Label Text="{Binding NHSno}" />
+                                        </StackLayout>
+
+                                        <BoxView Grid.Row="2" Grid.Column="0" IsVisible="{Binding Leave.IsCurrent}" Color="lavender" Grid.ColumnSpan="3" ></BoxView>
+                                        <Label Grid.Row="2" Grid.Column="0" IsVisible="{Binding Leave.IsCurrent}" HorizontalOptions="End" Text="On leave" />
+                                        <Label Grid.Row="2" Grid.Column="1" IsVisible="{Binding Leave.IsCurrent}" HorizontalOptions="End" Text="Return due:" />
+                                        <Label Grid.Row="2" Grid.Column="2" IsVisible="{Binding Leave.IsCurrent}" Text="{Binding Leave.TimeRetDue, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter} }" />
+
+                                        <Button Grid.Row="3" Grid.Column="0" Text="Details" IsVisible="{Binding IsSelected}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToDetailsCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
+                                        <Button Grid.Row="3" Grid.Column="1" Text="Leave" IsVisible="{Binding ShowLeaveButton}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToLeaveCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
+                                        <Button Grid.Row="3" Grid.Column="1" Text="Edit Leave" IsVisible="{Binding ShowLeaveEditButton}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToLeaveEditCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
+                                        
+                                        <Button Grid.Row="3" Grid.Column="2" Text="Observation" IsVisible="{Binding ShowObsButton}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToObsCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
+
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="SASMobileApp1.Views.LeavePage" Title="Leave"
+             NavigationPage.HasNavigationBar="true">
+<ScrollView>
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Padding="13, 0" Grid.Row="0">
+                <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
+                <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
+            </StackLayout>
+           
+                <TableView Grid.Row="1" HasUnevenRows="True">
+                    <TableRoot>
+                        <TableSection Title="Enter Leave Details">
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                        <Label Text="Leave Type" VerticalOptions="Center"></Label>
+                                        <Picker HorizontalOptions="StartAndExpand"
+                                                MinimumWidthRequest="80"
+                                                Title="Select"
+                                                ItemsSource="{Binding LeaveTypes}"
+                                                ItemDisplayBinding="{Binding Text}"
+                                                SelectedItem="{Binding SelectLeaveType}">
+                                        </Picker>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                        <Label Text="Return Due" VerticalOptions="Center">
+                                        </Label>
+                                        <TimePicker Time="{Binding LeaveRetTime}" Format="HH:mm">
+                                        </TimePicker>
+                                        <DatePicker Date="{Binding LeaveRetDate}">
+                                            <DatePicker.Format>
+                                                dd/MM/yyyy
+                                            </DatePicker.Format>
+                                        </DatePicker>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Padding="13, 0">
+                                            <Editor
+                                                HeightRequest="150"
+                                                Placeholder="Comments/Description"
+                                                    BackgroundColor="Azure"
+                                                    Text="{Binding Comments}">
+                                            </Editor>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Button Grid.Column="0"
+                                                Text="Cancel"
+                                                BackgroundColor="beige"
+                                                CornerRadius="20"
+                                                Command="{Binding CancelCommand}" />
+                                        <Button Grid.Column="1"
+                                                Text="Submit"
+                                                BackgroundColor="beige"
+                                                CornerRadius="20"
+                                                Command="{Binding SubmitLeaveCommand}" />
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+
+       
+ </Grid>                                 
+    </StackLayout>
+</ScrollView> 
+</ContentPage>

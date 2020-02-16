@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="SASMobileApp1.Views.LeaveEditPage" Title="Edit Leave">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Padding="13, 0" Grid.Row="0">
+                <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
+                <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
+            </StackLayout>
+
+
+
+
+            <TableView HasUnevenRows="True" Grid.Row="1">
+                <TableRoot>
+                    <TableSection Title="Leave Details">
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                    <Label Text="Leave Type:" VerticalOptions="Center"></Label>
+                                    <Label Text="{Binding Pt.Leave.LeaveType.Text}" VerticalOptions="Center"></Label>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                    <Label Text="Leave Commenced @ " VerticalOptions="Center"></Label>
+                                    <Label Text="{Binding Pt.Leave.TimeOut, StringFormat='{0:HH:mm d/M/yy}'}" VerticalOptions="Center"></Label>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Padding="13, 0">
+                                    <Label Text="Comments/Description:"></Label>
+                                    <ScrollView Orientation="Vertical" HeightRequest="150" VerticalScrollBarVisibility="Always">
+                                        <Label BackgroundColor="Azure" LineBreakMode="WordWrap" Text="{Binding Pt.Leave.Description}">
+                                        </Label>
+                                    </ScrollView>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                    <Label Text="Return Due @ " VerticalOptions="Center"></Label>
+                                    <Label Text="{Binding Pt.Leave.TimeRetDue, StringFormat='{0:HH:mm d/M/yy}'}" VerticalOptions="Center"></Label>
+                                </StackLayout>
+
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Enter Return Time">
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="13, 0">
+                                    <Label Text="Returned @ " VerticalOptions="Center">
+                                    </Label>
+                                    <TimePicker Time="{Binding LeaveRetTime}" Format="HH:mm">
+                                    </TimePicker>
+                                    <DatePicker Date="{Binding LeaveRetDate}">
+                                        <DatePicker.Format>
+                                            dd/MM/yyyy
+                                        </DatePicker.Format>
+                                    </DatePicker>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Button Grid.Column="0"
+                                            Text="Cancel"
+                                            BackgroundColor="beige"
+                                            CornerRadius="20"
+                                            Command="{Binding CancelCommand}" />
+                                    <Button Grid.Column="1"
+                                            Text="Submit"
+                                            BackgroundColor="beige"
+                                            CornerRadius="20"
+                                            IsEnabled="{Binding !Saving}"
+                                            Command="{Binding SubmitLeaveCommand}" />
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

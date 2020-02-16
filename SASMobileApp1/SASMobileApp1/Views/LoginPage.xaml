@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="SASMobileApp1.Views.LoginPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Entry">
+                        <Setter Property="Margin" Value="40,10" />
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
+                <Image Source="shieldLogo.png" />
+                <Entry Text="{Binding UserName}" Placeholder="Enter the username" VerticalOptions="EndAndExpand" />
+                <Entry Text="{Binding Password}" IsPassword="true" Placeholder="Did you read the code???" VerticalOptions="CenterAndExpand" />
+
+                <Picker VerticalOptions="StartAndExpand" Margin="40,10"
+                Title="Select a Ward"
+                ItemsSource="{Binding WardList}"
+                SelectedItem="{Binding SelectedWard}"
+                ></Picker>
+
+
+                <Button Text="Submit"
+                         BackgroundColor="beige"
+                         CornerRadius="20"
+                        Command="{Binding LoginCommand}" />
+
+            <ActivityIndicator x:Name="actInd" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
+
+            </StackLayout>
+           
+
+        </Grid>
+       
+    </ContentPage.Content>
+
+</ContentPage>
