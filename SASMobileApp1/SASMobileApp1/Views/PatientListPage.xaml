@@ -34,6 +34,9 @@
                 <Button Grid.Row="0" Grid.Column="3" Text="Refresh" BackgroundColor="beige" CornerRadius="20" Command="{Binding UpdateListCommand}" />
             </Grid>
 
+
+
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -92,6 +95,8 @@
                                         <Button Grid.Row="3" Grid.Column="2" Text="Observation" IsVisible="{Binding ShowObsButton}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToObsCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
 
                                     </Grid>
+
+
                                 </ViewCell.View>
                             </ViewCell>
                         </DataTemplate>

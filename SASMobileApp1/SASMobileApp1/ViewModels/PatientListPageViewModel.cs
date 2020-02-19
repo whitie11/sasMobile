@@ -73,8 +73,8 @@ namespace SASMobileApp1.ViewModels
         public DelegateCommand WardChangeCommand { get; }
 
         private void OnItemTappedCommandExecuted(PatientListItem pt) =>
-           ShowOrHideButtons(pt);
-
+         //  ShowOrHideButtons(pt);
+         NavigateToDetails(pt);
 
         private bool CanNavigate(PatientListItem arg)
         {

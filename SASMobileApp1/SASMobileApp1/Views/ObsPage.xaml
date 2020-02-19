@@ -1,17 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="SASMobileApp1.Views.ObsPage" Title="Observation">
     <StackLayout>
-        <Label Text="{Binding Pt.FullName}" />
-        <ScrollView>
+         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        <StackLayout Orientation="Horizontal" Padding="13, 0" Grid.Row="0">
+            <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
+            <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
+        </StackLayout>
+
+        <ScrollView Grid.Row="1">
             <StackLayout>
+
                 <ScrollView>
                     <StackLayout>
                         <Editor HeightRequest="100" Text="{Binding Notes}" Placeholder="Comments" BackgroundColor="Azure">
                         </Editor>
                     </StackLayout>
                 </ScrollView>
-
-
 
                 <Picker IsFocused="{Binding LocPIckerEnabled}" BackgroundColor="{Binding LocPIckerColour}" Title="Patient Location" ItemsSource="{Binding LocationList}" SelectedItem="{Binding Location}"></Picker>
 
@@ -27,5 +35,6 @@
 
             </StackLayout>
         </ScrollView>
+         </Grid>
     </StackLayout>
 </ContentPage>

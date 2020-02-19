@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="SASMobileApp1.Views.LeaveEditPage" Title="Edit Leave">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="SASMobileApp1.Views.LeaveEditPage"
+             Title="Return from Leave"
+             NavigationPage.BackButtonTitle="Back">
+
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Grid>
@@ -11,9 +17,6 @@
                 <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
                 <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
             </StackLayout>
-
-
-
 
             <TableView HasUnevenRows="True" Grid.Row="1">
                 <TableRoot>
@@ -64,7 +67,7 @@
                                 <StackLayout Orientation="Horizontal" Padding="13, 0">
                                     <Label Text="Returned @ " VerticalOptions="Center">
                                     </Label>
-                                    <TimePicker Time="{Binding LeaveRetTime}" Format="HH:mm">
+                                                <TimePicker Time="{Binding LeaveRetTime}" Format="HH:mm">
                                     </TimePicker>
                                     <DatePicker Date="{Binding LeaveRetDate}">
                                         <DatePicker.Format>

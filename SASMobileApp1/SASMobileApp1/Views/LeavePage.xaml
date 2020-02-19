@@ -3,22 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="SASMobileApp1.Views.LeavePage" Title="Leave"
-             NavigationPage.HasNavigationBar="true">
-<ScrollView>
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+             x:Class="SASMobileApp1.Views.LeavePage"
+             Title="Start Leave"
+             NavigationPage.HasNavigationBar="true"
+             NavigationPage.BackButtonTitle="Back">
+    <ScrollView>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <StackLayout Orientation="Horizontal" Padding="13, 0" Grid.Row="0">
-                <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
-                <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
-            </StackLayout>
-           
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal" Padding="13, 0" Grid.Row="0">
+                    <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
+                    <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
+                </StackLayout>
+
                 <TableView Grid.Row="1" HasUnevenRows="True">
                     <TableRoot>
                         <TableSection Title="Enter Leave Details">
@@ -55,12 +57,12 @@
                             <ViewCell>
                                 <ViewCell.View>
                                     <StackLayout Padding="13, 0">
-                                            <Editor
+                                        <Editor
                                                 HeightRequest="150"
                                                 Placeholder="Comments/Description"
                                                     BackgroundColor="Azure"
                                                     Text="{Binding Comments}">
-                                            </Editor>
+                                        </Editor>
                                     </StackLayout>
                                 </ViewCell.View>
                             </ViewCell>
@@ -87,8 +89,8 @@
                     </TableRoot>
                 </TableView>
 
-       
- </Grid>                                 
-    </StackLayout>
-</ScrollView> 
+
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
