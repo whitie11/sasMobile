@@ -81,7 +81,9 @@
                                         <BoxView Grid.Row="2" Grid.Column="0" IsVisible="{Binding Leave.IsCurrent}" Color="lavender" Grid.ColumnSpan="3" ></BoxView>
                                         <Label Grid.Row="2" Grid.Column="0" IsVisible="{Binding Leave.IsCurrent}" HorizontalOptions="End" Text="On leave" />
                                         <Label Grid.Row="2" Grid.Column="1" IsVisible="{Binding Leave.IsCurrent}" HorizontalOptions="End" Text="Return due:" />
-                                        <Label Grid.Row="2" Grid.Column="2" IsVisible="{Binding Leave.IsCurrent}" Text="{Binding Leave.TimeRetDue, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter} }" />
+                                        <Label Grid.Row="2" Grid.Column="2" IsVisible="{Binding Leave.IsCurrent}"
+                                               Text="{Binding Leave.TimeRetDue, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter}}"
+                                               BackgroundColor="{Binding ObsRetColour}" />
 
                                         <Button Grid.Row="3" Grid.Column="0" Text="Details" IsVisible="{Binding IsSelected}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToDetailsCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />
                                         <Button Grid.Row="3" Grid.Column="1" Text="Leave" IsVisible="{Binding ShowLeaveButton}" BackgroundColor="beige" CornerRadius="20" Command="{Binding BindingContext.NavigateToLeaveCommand, Source={x:Reference PatientView }}" CommandParameter="{Binding .}" />

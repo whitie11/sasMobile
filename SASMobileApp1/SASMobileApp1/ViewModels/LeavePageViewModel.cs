@@ -205,7 +205,7 @@ namespace SASMobileApp1.ViewModels
 
         async void errorMessage(string message)
         {
-            await PageDialogService.DisplayAlertAsync("ERROR", message, "Continue");
+            await PageDialogService.DisplayAlertAsync("ERROR", message, "Close");
 
         }
 

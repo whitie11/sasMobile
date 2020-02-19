@@ -173,6 +173,11 @@ namespace SASMobileApp1.ViewModels
                     {
                         pli.ObsTimeColour = "LightPink";
                     }
+                    if (pli.Leave.TimeRetDue == null || pli.Leave.TimeRetDue < timeCheck)
+                    {
+                        pli.ObsRetColour = "LightPink";
+                    }
+
 
                     if (pli.Leave == null)
                     {

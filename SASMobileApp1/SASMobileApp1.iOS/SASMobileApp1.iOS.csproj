@@ -57,6 +57,9 @@
     <MtouchVerbosity>2</MtouchVerbosity>
 <CodesignKey>iPhone Developer</CodesignKey>
 <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+<MtouchSdkVersion>13.2</MtouchSdkVersion>
+<MtouchArch>ARMv7, ARM64</MtouchArch>
+<MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

@@ -94,6 +94,12 @@ namespace SASMobileApp1.Models
             set;
         }
 
+        public string ObsRetColour
+        {
+            get;
+            set;
+        }
+
         public bool ShowObsButton
         {
             get
