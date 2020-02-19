@@ -91,3 +91,4 @@ C:/Users/whiti/source/repos/SAS/SASMobileApp1/SASMobileApp1/SASMobileApp1/obj/De
 /Users/macbook/Projects/SASMobileApp1/SASMobileApp1/SASMobileApp1/obj/Debug/netstandard2.0/XamlC.stamp
 /Users/macbook/Projects/SASMobileApp1/SASMobileApp1/SASMobileApp1/obj/Debug/netstandard2.0/SASMobileApp1.dll
 /Users/macbook/Projects/SASMobileApp1/SASMobileApp1/SASMobileApp1/obj/Debug/netstandard2.0/SASMobileApp1.pdb
+/Users/macbook/Projects/SASMobileApp1/SASMobileApp1/SASMobileApp1/obj/Debug/netstandard2.0/SASMobileApp1.csprojAssemblyReference.cache
