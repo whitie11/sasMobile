@@ -3,35 +3,97 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:converter="clr-namespace:SASMobileApp1.Converters"
              x:Class="SASMobileApp1.Views.PatientDetailsPage"
              Title="Patient Details">
-<StackLayout>
-    <StackLayout Orientation="Horizontal" Padding="13, 0">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:UtcToZonedDateTimeConverter x:Key="utcToZonedDateTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="13, 0">
                 <Label Text="Selected Patient:" VerticalOptions="Center"></Label>
                 <Label Text="{Binding Pt.FullName}" VerticalOptions="Center"></Label>
             </StackLayout>
 
-    <StackLayout HorizontalOptions="CenterAndExpand"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition  Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Pt.FullName}" />
+                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+                    <Label Text="Section:" />
+                    <Label Text="{Binding Pt.Section}" />
+                </StackLayout>
+
+                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End" Text="Seen:" />
+                <Label Grid.Row="1" Grid.Column="2"
+                   Text="{Binding Pt.LastSeen, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter} }"
+                   BackgroundColor="{Binding Pt.ObsTimeColour}" />
+
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="NHSno:" />
+                    <Label Text="{Binding Pt.NHSno}" />
+                </StackLayout>
+
+                <BoxView Grid.Row="2" Grid.Column="0"
+                     IsVisible="{Binding Pt.Leave.IsCurrent}"
+                     Color="lavender"
+                     Grid.ColumnSpan="3" >
+                </BoxView>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                   IsVisible="{Binding Pt.Leave.IsCurrent}"
+                   HorizontalOptions="End" Text="On leave" />
+                <Label Grid.Row="2" Grid.Column="1"
+                   IsVisible="{Binding Pt.Leave.IsCurrent}"
+                   HorizontalOptions="End" Text="Return due:" />
+                <Label Grid.Row="2" Grid.Column="2"
+                   IsVisible="{Binding Pt.Leave.IsCurrent}"
+                   Text="{Binding Pt.Leave.TimeRetDue, StringFormat='{0:HH:mm dd/MM/yyyy}', Converter={StaticResource utcToZonedDateTimeConverter}}"
+                   BackgroundColor="{Binding Pt.ObsRetColour}" />
+            </Grid>
+
+            <StackLayout HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand">
-        <Label Text="Patient Details" />
-        <Button Text="Obs"
+                <Label Text="Select a Task" HorizontalTextAlignment="Center" />
+                <Button Text="Obs"
                 BackgroundColor="beige"
                 CornerRadius="20"
                 Command="{Binding NavigateToTaskCommand}"
                 CommandParameter="ObsPage" />
-        <Button Text="Leave"
+
+                <Button Text="{Binding LeaveLabel}"
                 BackgroundColor="beige"
                 CornerRadius="20"
+              WidthRequest="150"
                 Command="{Binding NavigateToTaskCommand}"
                 CommandParameter="LeavePage" />
-        <Button Text="Property"
+
+                <Button Text="Property"
                 BackgroundColor="beige"
                 CornerRadius="20"
                 Command="{Binding NavigateToTaskCommand}"
                 CommandParameter="PropertyPage" />
 
 
-    </StackLayout>
+            </StackLayout>
 
-</StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

@@ -21,6 +21,16 @@ namespace SASMobileApp1.ViewModels
             }
         }
 
+        private string leaveLabel;
+        public string LeaveLabel
+        {
+            get { return leaveLabel; }
+            set
+            {
+                SetProperty(ref leaveLabel, value);
+            }
+        }
+
         private DelegateCommand<string> _navigateToTaskCommand { get; set; }
         public DelegateCommand<string> NavigateToTaskCommand => _navigateToTaskCommand
             ?? (_navigateToTaskCommand = new DelegateCommand<string>(Navigate, CanNavigate));
@@ -49,7 +59,14 @@ namespace SASMobileApp1.ViewModels
         public void Initialize(INavigationParameters parameters)
         {
             Pt = parameters.GetValue<PatientListItem>("patient");
-           
+            if (Pt.Leave.IsCurrent)
+            {
+                LeaveLabel = "Return from Leave";
+            } else
+            {
+                LeaveLabel = "Start Leave";
+            }
+            
         }
     }
 }
